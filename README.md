@@ -1,10 +1,13 @@
 Kotlin - Java - equality - playground
 
-This repository it to exploring the behaviors of each compiler between Java and Kotlin by using [*JavaPoet*](https://github.com/square/javapoet) and [*KotlinPoet*](https://github.com/square/kotlinpoet) to generate control flow code. The original code is on `master` branch while the generated files, [`JavaGenerated.java`](https://github.com/lexcao/kotlin-equality/blob/generated/src/main/java/io/github/lexcao/equality/generated/JavaGenerated.java) and [`KotlinGenerated.kt`](https://github.com/lexcao/kotlin-equality/blob/generated/src/main/kotlin/io/github/lexcao/equality/generated/KotlinGenerated.kt), are on `generated` branch.
+This repository explored the equality behaviors on each compiler of Java and Kotlin by using [*JavaPoet*](https://github.com/square/javapoet) and [*KotlinPoet*](https://github.com/square/kotlinpoet) to generate control flow code. 
+
+The original code is on `master` branch while the generated files, [`JavaGenerated.java`](https://github.com/lexcao/kotlin-equality/blob/generated/src/main/java/io/github/lexcao/equality/generated/JavaGenerated.java) and [`KotlinGenerated.kt`](https://github.com/lexcao/kotlin-equality/blob/generated/src/main/kotlin/io/github/lexcao/equality/generated/KotlinGenerated.kt), are on `generated` branch.
 
 ## Why equality
 I encountered a potentially unexpected equality result when I am coding with Kotlin. Here are some code snippets.
-You can read details on my blog, if you are interested.
+
+// (WIP) You can read details on my blog, if you are interested.
 
 ```
 // say we hava a enum 
@@ -39,5 +42,5 @@ My question is:
 * Is that a wrong code?
 
 ## Why compiles successfully?
-...(under construction)
+(WIP)
 
