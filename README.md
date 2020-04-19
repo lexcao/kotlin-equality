@@ -1,6 +1,6 @@
 Kotlin - Java - equality - playground
 
-This repository explored the behaviors of each compiler between Java and Kotlin by using [*JavaPoet*](https://github.com/square/javapoet) and [*KotlinPoet*](https://github.com/square/kotlinpoet) to generate control flow code. The original code is on `master` branch while the generated files, [`JavaGenerated.java`]() and [`KotlinGenerated.kt`](), are on `generated` branch.
+This repository it to exploring the behaviors of each compiler between Java and Kotlin by using [*JavaPoet*](https://github.com/square/javapoet) and [*KotlinPoet*](https://github.com/square/kotlinpoet) to generate control flow code. The original code is on `master` branch while the generated files, [`JavaGenerated.java`]() and [`KotlinGenerated.kt`](), are on `generated` branch.
 
 ## Why equality
 I encountered a potentially unexpected equality result when I am coding with Kotlin. Here are some code snippets.
