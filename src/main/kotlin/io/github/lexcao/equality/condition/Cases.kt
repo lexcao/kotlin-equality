@@ -6,28 +6,30 @@ import io.github.lexcao.equality.subjects.KotlinCase
 
 object Cases {
 
-    private val subjects: List<CompositeSubject> = composite(KotlinCase.typeClass) +
-            composite(KotlinCase.typeEnum) + composite(KotlinCase.typeStatic)
+    private val subjects: List<CompositeSubject> =
+        composite(KotlinCase.KotlinClass()) +
+                composite(KotlinCase.KotlinEnum()) +
+                composite(KotlinCase.KotlinStatic())
 
-    private fun composite(kotlin: Subject): List<CompositeSubject> {
+    private fun composite(kotlin: KotlinSubject): List<CompositeSubject> {
         return listOf(
             CompositeSubject(
-                java = JavaCase.typeClass,
+                java = JavaCase.JavaClass(),
                 kotlin = kotlin
             ),
             CompositeSubject(
-                java = JavaCase.typeEnum,
+                java = JavaCase.JavaEnum(),
                 kotlin = kotlin
             ),
             CompositeSubject(
-                java = JavaCase.typeStatic,
+                java = JavaCase.JavaStatic(),
                 kotlin = kotlin
             )
         )
     }
 
     fun kotlinFunctions(): List<ControlFlow.KotlinCF> {
-        val pairs = subjects.flatMap { it.pairs }
+        val pairs = subjects.flatMap { it.pairs() }
             .distinct()
 
         return pairs.map {
@@ -44,14 +46,14 @@ object Cases {
     }
 
     fun javaMethods(): List<ControlFlow.JavaCF> {
-        val pairs = subjects.flatMap { it.pairs }
+        val pairs = subjects.flatMap { it.pairs() }
             .distinct()
         return pairs.map {
             ControlFlow.IfJ(
                 name = "if_${it.name}",
                 pair = it
             )
-        } + pairs.filter { it.first.type == SubjectType.ENUM }
+        } + pairs.filter { it.first is EnumType }
             .map {
                 ControlFlow.SwitchJ(
                     name = "switch_${it.name}",
@@ -61,5 +63,5 @@ object Cases {
     }
 
     private val Pair<Subject, Subject>.name: String
-        get() = "${first}_To_${second}"
+        get() = "${first.name}_To_${second.name}"
 }
