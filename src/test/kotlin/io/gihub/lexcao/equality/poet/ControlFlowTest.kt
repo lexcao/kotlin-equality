@@ -1,7 +1,7 @@
 package io.gihub.lexcao.equality.poet
 
-import io.github.lexcao.equality.condition.Subject
 import io.github.lexcao.equality.poets.ControlFlow
+import io.github.lexcao.equality.subjects.KotlinCase
 import io.github.lexcao.equality.subjects.MyKotlinClassA
 import io.github.lexcao.equality.subjects.MyKotlinClassB
 import org.junit.Assert.assertEquals
@@ -9,8 +9,8 @@ import org.junit.Test
 
 class ControlFlowTest {
 
-    val a = Subject(MyKotlinClassA::class.java, MyKotlinClassB::class.java, "Kotlin_Class", "MyKotlinClassA()")
-    val b = Subject(MyKotlinClassA::class.java, MyKotlinClassB::class.java, "Kotlin_Class", "MyKotlinClassA()")
+    val a = KotlinCase.KotlinClass()
+    val b = KotlinCase.KotlinClass()
     val fullClassNameA = MyKotlinClassA::class.java.canonicalName
     val fullClassNameB = MyKotlinClassB::class.java.canonicalName
 

@@ -7,6 +7,7 @@ import com.squareup.kotlinpoet.asClassName
 import io.github.lexcao.equality.JavaParam
 import io.github.lexcao.equality.KotlinParam
 import io.github.lexcao.equality.condition.Subject
+import io.github.lexcao.equality.subjects.KotlinCase
 
 interface ControlFlow<Method, Param> {
 
@@ -24,13 +25,15 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : KotlinCF {
 
+        private val nullable = (pair.first as? KotlinCase.KotlinClass)?.nullable ?: false
+
         override val param: KotlinParam = KotlinParam(
             "a", pair.first
-                .type.asClassName().copy(nullable = pair.first.nullable)
+                .target.asClassName().copy(nullable = nullable)
         )
 
         override val flow: FunSpec by lazy {
-            kotlinFlow(name, "if (${param.name} == ${pair.second.value})", param)
+            kotlinFlow(name, "if (${param.name} == ${pair.second.kotlinValue()})", param)
         }
 
         override fun toString(): String {
@@ -46,14 +49,16 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : KotlinCF {
 
+        private val nullable = (pair.first as? KotlinCase.KotlinClass)?.nullable ?: false
+
         override val param: KotlinParam = KotlinParam(
             "a", pair.first
-                .type.asClassName().copy(nullable = pair.first.nullable)
+                .target.asClassName().copy(nullable = nullable)
         )
 
         override val flow: FunSpec by lazy {
             kotlinFlow(name, "when (${param.name})", param) {
-                addStatement("${pair.second.value} -> {}")
+                addStatement("${pair.second.kotlinValue()} -> {}")
                 addStatement("else -> throw IllegalStateException()")
             }
         }
@@ -71,7 +76,7 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : JavaCF {
 
-        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.type), "a").build()
+        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.target), "a").build()
 
         override val flow: MethodSpec by lazy {
             javaFlow(name, "if (${param.name}.equals(${pair.second.javaValue()}))", param) {
@@ -94,7 +99,7 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : JavaCF {
 
-        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.type), "a").build()
+        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.target), "a").build()
 
         override val flow: MethodSpec by lazy {
             javaFlow(name, "switch (${param.name})", param) {

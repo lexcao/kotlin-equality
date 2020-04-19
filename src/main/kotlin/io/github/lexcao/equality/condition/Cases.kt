@@ -6,31 +6,62 @@ import io.github.lexcao.equality.subjects.KotlinCase
 
 object Cases {
 
-    private val subjects: List<CompositeSubject> = listOf(
-        CompositeSubject(
-            type = SubjectType.CLASS,
-            java = JavaCase.typeClass,
-            kotlin = KotlinCase.typeClass
-        ),
-        CompositeSubject(
-            type = SubjectType.ENUM,
-            java = JavaCase.typeEnum,
-            kotlin = KotlinCase.typeEnum
-        ),
-        CompositeSubject(
-            type = SubjectType.STATIC,
-            java = JavaCase.typeStatic,
-            kotlin = KotlinCase.typeStatic
+    private val subjects: List<CompositeSubject> =
+        composite(KotlinCase.KotlinClass()) +
+                composite(KotlinCase.KotlinEnum()) +
+                composite(KotlinCase.KotlinStatic())
+
+    private fun composite(kotlin: KotlinSubject): List<CompositeSubject> {
+        return listOf(
+            CompositeSubject(
+                java = JavaCase.JavaClass(),
+                kotlin = kotlin
+            ),
+            CompositeSubject(
+                java = JavaCase.JavaEnum(),
+                kotlin = kotlin
+            ),
+            CompositeSubject(
+                java = JavaCase.JavaStatic(),
+                kotlin = kotlin
+            )
         )
-    )
+    }
 
     fun kotlinFunctions(): List<ControlFlow.KotlinCF> {
-        return subjects.flatMap { it.generateKotlinControlFlow() }
+        val pairs = subjects.flatMap { it.pairs() }
+            .distinct()
+
+        return pairs.map {
+            ControlFlow.IfK(
+                name = "if_${it.name}",
+                pair = it
+            )
+        } + pairs.map {
+            ControlFlow.WhenK(
+                name = "when_${it.name}",
+                pair = it
+            )
+        }
     }
 
     fun javaMethods(): List<ControlFlow.JavaCF> {
-        return subjects.flatMap { it.generateIfJ() } +
-                subjects.filter { it.type == SubjectType.ENUM }
-                    .flatMap { it.generateSwitchJ() }
+        val pairs = subjects.flatMap { it.pairs() }
+            .distinct()
+        return pairs.map {
+            ControlFlow.IfJ(
+                name = "if_${it.name}",
+                pair = it
+            )
+        } + pairs.filter { it.first is EnumType }
+            .map {
+                ControlFlow.SwitchJ(
+                    name = "switch_${it.name}",
+                    pair = it
+                )
+            }
     }
+
+    private val Pair<Subject, Subject>.name: String
+        get() = "${first.name}_To_${second.name}"
 }

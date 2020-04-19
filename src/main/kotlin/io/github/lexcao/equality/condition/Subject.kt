@@ -1,26 +1,45 @@
 package io.github.lexcao.equality.condition
 
-data class Subject(
-    val type: Class<out Any>,
-    private val backup: Class<out Any>,
-    private val name: String,
-    val value: String,
-    var nullable: Boolean = false
-) {
+interface Subject {
 
-    fun javaValue(): String = if (name.endsWith("Class")) {
-        "new $value"
-    } else if (name.startsWith("Kotlin") && name.endsWith("Static")) {
-        "$value.INSTANCE"
-    } else {
-        value
-    }
+    /**
+     *  target class to apply for the left of the condition
+     */
+    val target: Class<out Any>
 
-    fun nullable(): Subject = this.copy(nullable = true)
-    fun backup(): Subject = this.copy(type = this.backup, backup = this.type)
+    /**
+     *  backup class to apply when meets same type
+     */
+    val backup: Class<out Any>
 
+    val name: String
+        get() = this.javaClass.simpleName
 
-    override fun toString(): String {
-        return if (nullable) "Nullable_$name" else name
-    }
+    /**
+     *  return the Java value of the target
+     */
+    fun javaValue(): String
+
+    /**
+     *  return the Kotlin value of the target
+     */
+    fun kotlinValue(): String
+
+    fun backup(): Subject
 }
+
+interface KotlinSubject : Subject {
+    val nullable: Boolean
+
+    override val name: String
+        get() = if (nullable) "Nullable" + super.name else super.name
+
+    fun nullable(): KotlinSubject
+    override fun backup(): KotlinSubject
+}
+
+interface JavaSubject : Subject
+
+interface ClassType
+interface EnumType
+interface StaticType
