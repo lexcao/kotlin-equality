@@ -6,8 +6,8 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.asClassName
 import io.github.lexcao.equality.JavaParam
 import io.github.lexcao.equality.KotlinParam
+import io.github.lexcao.equality.condition.KotlinSubject
 import io.github.lexcao.equality.condition.Subject
-import io.github.lexcao.equality.subjects.KotlinCase
 
 interface ControlFlow<Method, Param> {
 
@@ -25,7 +25,7 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : KotlinCF {
 
-        private val nullable = (pair.first as? KotlinCase.KotlinClass)?.nullable ?: false
+        private val nullable = (pair.first as? KotlinSubject)?.nullable ?: false
 
         override val param: KotlinParam = KotlinParam(
             "a", pair.first
@@ -49,7 +49,7 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : KotlinCF {
 
-        private val nullable = (pair.first as? KotlinCase.KotlinClass)?.nullable ?: false
+        private val nullable = (pair.first as? KotlinSubject)?.nullable ?: false
 
         override val param: KotlinParam = KotlinParam(
             "a", pair.first
