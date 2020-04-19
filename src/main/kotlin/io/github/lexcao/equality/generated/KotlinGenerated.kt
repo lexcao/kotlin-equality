@@ -12,42 +12,142 @@ import javax.print.attribute.standard.JobState
 import javax.print.attribute.standard.JobStateReason
 
 class KotlinGenerated {
-    fun if_Java_Class_To_Java_Class(a: MyJavaClassB) {
+    fun if_JavaClass_To_JavaClass(a: MyJavaClassB) {
         if (a == MyJavaClassA()) {
-            // compiled well
         }
     }
 
-    fun if_Java_Class_To_Kotlin_Class(a: MyJavaClassA) {
+    fun if_JavaClass_To_KotlinClass(a: MyJavaClassA) {
         if (a == MyKotlinClassA()) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyJavaClassA' and 'MyKotlinClassA'
         }
     }
 
-    fun if_Kotlin_Class_To_Kotlin_Class(a: MyKotlinClassB) {
+    fun if_KotlinClass_To_KotlinClass(a: MyKotlinClassB) {
         if (a == MyKotlinClassA()) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyKotlinClassB' and 'MyKotlinClassA'
         }
     }
 
-    fun if_Nullable_Kotlin_Class_To_Kotlin_Class(a: MyKotlinClassB?) {
+    fun if_NullableKotlinClass_To_KotlinClass(a: MyKotlinClassB?) {
         if (a == MyKotlinClassA()) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyKotlinClassB?' and 'MyKotlinClassA'
         }
     }
 
-    fun if_Nullable_Kotlin_Class_To_Java_Class(a: MyKotlinClassA?) {
+    fun if_NullableKotlinClass_To_JavaClass(a: MyKotlinClassA?) {
         if (a == MyJavaClassA()) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyKotlinClassA?' and 'MyJavaClassA'
         }
     }
 
-    fun when_Java_Class_To_Java_Class(a: MyJavaClassB) {
-        // compiled well
+    fun if_JavaEnum_To_JavaEnum(a: ElementType) {
+        if (a == RetentionPolicy.SOURCE) {
+        }
+    }
+
+    fun if_JavaEnum_To_KotlinClass(a: RetentionPolicy) {
+        if (a == MyKotlinClassA()) {
+        }
+    }
+
+    fun if_NullableKotlinClass_To_JavaEnum(a: MyKotlinClassA?) {
+        if (a == RetentionPolicy.SOURCE) {
+        }
+    }
+
+    fun if_JavaStatic_To_JavaStatic(a: JobStateReason) {
+        if (a == JobState.CANCELED) {
+        }
+    }
+
+    fun if_JavaStatic_To_KotlinClass(a: JobState) {
+        if (a == MyKotlinClassA()) {
+        }
+    }
+
+    fun if_NullableKotlinClass_To_JavaStatic(a: MyKotlinClassA?) {
+        if (a == JobState.CANCELED) {
+        }
+    }
+
+    fun if_JavaClass_To_KotlinEnum(a: MyJavaClassA) {
+        if (a == AnnotationRetention.SOURCE) {
+        }
+    }
+
+    fun if_KotlinEnum_To_KotlinEnum(a: AnnotationTarget) {
+        if (a == AnnotationRetention.SOURCE) {
+        }
+    }
+
+    fun if_NullableKotlinEnum_To_KotlinEnum(a: AnnotationTarget) {
+        if (a == AnnotationRetention.SOURCE) {
+        }
+    }
+
+    fun if_NullableKotlinEnum_To_JavaClass(a: AnnotationRetention) {
+        if (a == MyJavaClassA()) {
+        }
+    }
+
+    fun if_JavaEnum_To_KotlinEnum(a: RetentionPolicy) {
+        if (a == AnnotationRetention.SOURCE) {
+        }
+    }
+
+    fun if_NullableKotlinEnum_To_JavaEnum(a: AnnotationRetention) {
+        if (a == RetentionPolicy.SOURCE) {
+        }
+    }
+
+    fun if_JavaStatic_To_KotlinEnum(a: JobState) {
+        if (a == AnnotationRetention.SOURCE) {
+        }
+    }
+
+    fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention) {
+        if (a == JobState.CANCELED) {
+        }
+    }
+
+    fun if_JavaClass_To_KotlinStatic(a: MyJavaClassA) {
+        if (a == MyKotlinObjectA) {
+        }
+    }
+
+    fun if_KotlinStatic_To_KotlinStatic(a: MyKotlinObjectB) {
+        if (a == MyKotlinObjectA) {
+        }
+    }
+
+    fun if_NullableKotlinStatic_To_KotlinStatic(a: MyKotlinObjectB) {
+        if (a == MyKotlinObjectA) {
+        }
+    }
+
+    fun if_NullableKotlinStatic_To_JavaClass(a: MyKotlinObjectA) {
+        if (a == MyJavaClassA()) {
+        }
+    }
+
+    fun if_JavaEnum_To_KotlinStatic(a: RetentionPolicy) {
+        if (a == MyKotlinObjectA) {
+        }
+    }
+
+    fun if_NullableKotlinStatic_To_JavaEnum(a: MyKotlinObjectA) {
+        if (a == RetentionPolicy.SOURCE) {
+        }
+    }
+
+    fun if_JavaStatic_To_KotlinStatic(a: JobState) {
+        if (a == MyKotlinObjectA) {
+        }
+    }
+
+    fun if_NullableKotlinStatic_To_JavaStatic(a: MyKotlinObjectA) {
+        if (a == JobState.CANCELED) {
+        }
+    }
+
+    fun when_JavaClass_To_JavaClass(a: MyJavaClassB) {
         when (a) {
             MyJavaClassA() -> {
             }
@@ -55,9 +155,7 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Java_Class_To_Kotlin_Class(a: MyJavaClassA) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinClassA and MyJavaClassA
+    fun when_JavaClass_To_KotlinClass(a: MyJavaClassA) {
         when (a) {
             MyKotlinClassA() -> {
             }
@@ -65,9 +163,7 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Kotlin_Class_To_Kotlin_Class(a: MyKotlinClassB) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinClassA and MyKotlinClassB
+    fun when_KotlinClass_To_KotlinClass(a: MyKotlinClassB) {
         when (a) {
             MyKotlinClassA() -> {
             }
@@ -75,9 +171,7 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Nullable_Kotlin_Class_To_Kotlin_Class(a: MyKotlinClassB?) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinClassA and MyKotlinClassB?
+    fun when_NullableKotlinClass_To_KotlinClass(a: MyKotlinClassB?) {
         when (a) {
             MyKotlinClassA() -> {
             }
@@ -85,9 +179,7 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Nullable_Kotlin_Class_To_Java_Class(a: MyKotlinClassA?) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinClassA and MyKotlinClassA?
+    fun when_NullableKotlinClass_To_JavaClass(a: MyKotlinClassA?) {
         when (a) {
             MyJavaClassA() -> {
             }
@@ -95,50 +187,7 @@ class KotlinGenerated {
         }
     }
 
-    fun if_Java_Enum_To_Java_Enum(a: ElementType) {
-        if (a == RetentionPolicy.SOURCE) {
-            // [warning] IDEA
-            // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-            // 'ElementType' and 'RetentionPolicy' is always unsuccessful
-        }
-    }
-
-    fun if_Java_Enum_To_Kotlin_Enum(a: RetentionPolicy) {
-        if (a == AnnotationRetention.SOURCE) {
-            // [warning] IDEA
-            // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-            // 'RetentionPolicy' and 'AnnotationRetention' is always unsuccessful
-        }
-    }
-
-    fun if_Kotlin_Enum_To_Kotlin_Enum(a: AnnotationTarget) {
-        if (a == AnnotationRetention.SOURCE) {
-            // [warning] IDEA
-            // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-            // 'AnnotationTarget' and 'AnnotationRetention' is always unsuccessful
-        }
-    }
-
-    fun if_Nullable_Kotlin_Enum_To_Kotlin_Enum(a: AnnotationTarget?) {
-        if (a == AnnotationRetention.SOURCE) {
-            // [warning] IDEA
-            // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-            // 'AnnotationTarget' and 'AnnotationRetention' is always unsuccessful
-        }
-    }
-
-    fun if_Nullable_Kotlin_Enum_To_Java_Enum(a: AnnotationRetention?) {
-        if (a == RetentionPolicy.SOURCE) {
-            // [warning] IDEA
-            // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-            // 'AnnotationRetention' and 'RetentionPolicy' is always unsuccessful
-        }
-    }
-
-    fun when_Java_Enum_To_Java_Enum(a: ElementType) {
-        // [warning] IDEA
-        // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-        // 'ElementType' and 'RetentionPolicy' is always unsuccessful
+    fun when_JavaEnum_To_JavaEnum(a: ElementType) {
         when (a) {
             RetentionPolicy.SOURCE -> {
             }
@@ -146,43 +195,15 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Java_Enum_To_Kotlin_Enum(a: RetentionPolicy) {
-        // [warning] IDEA
-        // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-        // 'RetentionPolicy' and 'AnnotationRetention' is always unsuccessful
+    fun when_JavaEnum_To_KotlinClass(a: RetentionPolicy) {
         when (a) {
-            AnnotationRetention.SOURCE -> {
+            MyKotlinClassA() -> {
             }
             else -> throw IllegalStateException()
         }
     }
 
-    fun when_Kotlin_Enum_To_Kotlin_Enum(a: AnnotationTarget) {
-        // [warning] IDEA
-        // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-        // 'AnnotationTarget' and 'AnnotationRetention' is always unsuccessful
-        when (a) {
-            AnnotationRetention.SOURCE -> {
-            }
-            else -> throw IllegalStateException()
-        }
-    }
-
-    fun when_Nullable_Kotlin_Enum_To_Kotlin_Enum(a: AnnotationTarget?) {
-        // [warning] IDEA
-        // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-        // 'AnnotationTarget?' and 'AnnotationRetention' is always unsuccessful
-        when (a) {
-            AnnotationRetention.SOURCE -> {
-            }
-            else -> throw IllegalStateException()
-        }
-    }
-
-    fun when_Nullable_Kotlin_Enum_To_Java_Enum(a: AnnotationRetention?) {
-        // [warning] IDEA
-        // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums
-        // 'AnnotationRetention?' and 'RetentionPolicy' is always unsuccessful
+    fun when_NullableKotlinClass_To_JavaEnum(a: MyKotlinClassA?) {
         when (a) {
             RetentionPolicy.SOURCE -> {
             }
@@ -190,42 +211,7 @@ class KotlinGenerated {
         }
     }
 
-    fun if_Java_Static_To_Java_Static(a: JobStateReason) {
-        if (a == JobState.CANCELED) {
-            // compiled well
-        }
-    }
-
-    fun if_Java_Static_To_Kotlin_Static(a: JobState) {
-        if (a == MyKotlinObjectA) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'JobState' and 'MyKotlinObjectA'
-        }
-    }
-
-    fun if_Kotlin_Static_To_Kotlin_Static(a: MyKotlinObjectB) {
-        if (a == MyKotlinObjectA) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyKotlinObjectB' and 'MyKotlinObjectA'
-        }
-    }
-
-    fun if_Nullable_Kotlin_Static_To_Kotlin_Static(a: MyKotlinObjectB?) {
-        if (a == MyKotlinObjectA) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyKotlinObjectB' and 'MyKotlinObjectA'
-        }
-    }
-
-    fun if_Nullable_Kotlin_Static_To_Java_Static(a: MyKotlinObjectA?) {
-        if (a == JobState.CANCELED) {
-            // [error] compiler
-            // [EQUALITY_NOT_APPLICABLE] Operator '==' cannot be applied to 'MyKotlinObjectA?' and 'JobState'
-        }
-    }
-
-    fun when_Java_Static_To_Java_Static(a: JobStateReason) {
-        // compiled well
+    fun when_JavaStatic_To_JavaStatic(a: JobStateReason) {
         when (a) {
             JobState.CANCELED -> {
             }
@@ -233,9 +219,87 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Java_Static_To_Kotlin_Static(a: JobState) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: JobState and MyKotlinObjectA
+    fun when_JavaStatic_To_KotlinClass(a: JobState) {
+        when (a) {
+            MyKotlinClassA() -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinClass_To_JavaStatic(a: MyKotlinClassA?) {
+        when (a) {
+            JobState.CANCELED -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_JavaClass_To_KotlinEnum(a: MyJavaClassA) {
+        when (a) {
+            AnnotationRetention.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_KotlinEnum_To_KotlinEnum(a: AnnotationTarget) {
+        when (a) {
+            AnnotationRetention.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinEnum_To_KotlinEnum(a: AnnotationTarget) {
+        when (a) {
+            AnnotationRetention.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinEnum_To_JavaClass(a: AnnotationRetention) {
+        when (a) {
+            MyJavaClassA() -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_JavaEnum_To_KotlinEnum(a: RetentionPolicy) {
+        when (a) {
+            AnnotationRetention.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinEnum_To_JavaEnum(a: AnnotationRetention) {
+        when (a) {
+            RetentionPolicy.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_JavaStatic_To_KotlinEnum(a: JobState) {
+        when (a) {
+            AnnotationRetention.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention) {
+        when (a) {
+            JobState.CANCELED -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_JavaClass_To_KotlinStatic(a: MyJavaClassA) {
         when (a) {
             MyKotlinObjectA -> {
             }
@@ -243,9 +307,7 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Kotlin_Static_To_Kotlin_Static(a: MyKotlinObjectB) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinObjectB and MyKotlinObjectA
+    fun when_KotlinStatic_To_KotlinStatic(a: MyKotlinObjectB) {
         when (a) {
             MyKotlinObjectA -> {
             }
@@ -253,9 +315,7 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Nullable_Kotlin_Static_To_Kotlin_Static(a: MyKotlinObjectB?) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinObjectB? and MyKotlinObjectA
+    fun when_NullableKotlinStatic_To_KotlinStatic(a: MyKotlinObjectB) {
         when (a) {
             MyKotlinObjectA -> {
             }
@@ -263,9 +323,39 @@ class KotlinGenerated {
         }
     }
 
-    fun when_Nullable_Kotlin_Static_To_Java_Static(a: MyKotlinObjectA?) {
-        // [error] compiler
-        // [INCOMPATIBLE_TYPES] Incompatible types: MyKotlinObjectA? and JobState
+    fun when_NullableKotlinStatic_To_JavaClass(a: MyKotlinObjectA) {
+        when (a) {
+            MyJavaClassA() -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_JavaEnum_To_KotlinStatic(a: RetentionPolicy) {
+        when (a) {
+            MyKotlinObjectA -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinStatic_To_JavaEnum(a: MyKotlinObjectA) {
+        when (a) {
+            RetentionPolicy.SOURCE -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_JavaStatic_To_KotlinStatic(a: JobState) {
+        when (a) {
+            MyKotlinObjectA -> {
+            }
+            else -> throw IllegalStateException()
+        }
+    }
+
+    fun when_NullableKotlinStatic_To_JavaStatic(a: MyKotlinObjectA) {
         when (a) {
             JobState.CANCELED -> {
             }

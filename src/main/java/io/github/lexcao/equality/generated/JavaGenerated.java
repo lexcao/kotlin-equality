@@ -10,159 +10,169 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 
 class JavaGenerated {
-  void if_Java_Class_To_Java_Class(MyJavaClassB a) {
+  void if_JavaClass_To_JavaClass(MyJavaClassB a) {
     if (a.equals(new MyJavaClassA())) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyJavaClassB' and 'MyJavaClassA'
     } else if (a == new MyJavaClassA()) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyJavaClassB', 'MyJavaClassA'
     }
   }
 
-  void if_Java_Class_To_Kotlin_Class(MyJavaClassA a) {
+  void if_JavaClass_To_KotlinClass(MyJavaClassA a) {
     if (a.equals(new MyKotlinClassA())) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyJavaClassA' and 'MyKotlinClassA'
     } else if (a == new MyKotlinClassA()) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyJavaClassA', 'MyKotlinClassA'
     }
   }
 
-  void if_Kotlin_Class_To_Kotlin_Class(MyKotlinClassB a) {
+  void if_KotlinClass_To_KotlinClass(MyKotlinClassB a) {
     if (a.equals(new MyKotlinClassA())) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyKotlinClassB' and 'MyKotlinClassA'
     } else if (a == new MyKotlinClassA()) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyKotlinClassB', 'MyKotlinClassA'
     }
   }
 
-  void if_Nullable_Kotlin_Class_To_Kotlin_Class(MyKotlinClassB a) {
+  void if_NullableKotlinClass_To_KotlinClass(MyKotlinClassB a) {
     if (a.equals(new MyKotlinClassA())) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyKotlinClassB' and 'MyKotlinClassA'
     } else if (a == new MyKotlinClassA()) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyKotlinClassB', 'MyKotlinClassA'
     }
   }
 
-  void if_Nullable_Kotlin_Class_To_Java_Class(MyKotlinClassA a) {
+  void if_NullableKotlinClass_To_JavaClass(MyKotlinClassA a) {
     if (a.equals(new MyJavaClassA())) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyKotlinClassA' and 'MyJavaClassA'
     } else if (a == new MyJavaClassA()) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyKotlinClassA', 'MyJavaClassA'
     }
   }
 
-  void if_Java_Enum_To_Java_Enum(ElementType a) {
+  void if_JavaEnum_To_JavaEnum(ElementType a) {
     if (a.equals(RetentionPolicy.SOURCE)) {
-      // [warning] IDEA
-      // Condition 'a.equals(RetentionPolicy.SOURCE)' is always 'false'
     } else if (a == RetentionPolicy.SOURCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'ElementType', 'RetentionPolicy'
     }
   }
 
-  void if_Java_Enum_To_Kotlin_Enum(RetentionPolicy a) {
-    if (a.equals(AnnotationRetention.SOURCE)) {
-      // [warning] IDEA
-      // Condition 'a.equals(AnnotationRetention.SOURCE)' is always 'false'
-    } else if (a == AnnotationRetention.SOURCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'RetentionPolicy', 'AnnotationRetention'
+  void if_JavaEnum_To_KotlinClass(RetentionPolicy a) {
+    if (a.equals(new MyKotlinClassA())) {
+    } else if (a == new MyKotlinClassA()) {
     }
   }
 
-  void if_Kotlin_Enum_To_Kotlin_Enum(AnnotationTarget a) {
-    if (a.equals(AnnotationRetention.SOURCE)) {
-      // [warning] IDEA
-      // Condition 'a.equals(AnnotationRetention.SOURCE)' is always 'false'
-    } else if (a == AnnotationRetention.SOURCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'AnnotationTarget', 'AnnotationRetention'
-    }
-  }
-
-  void if_Nullable_Kotlin_Enum_To_Kotlin_Enum(AnnotationTarget a) {
-    if (a.equals(AnnotationRetention.SOURCE)) {
-      // [warning] IDEA
-      // Condition 'a.equals(AnnotationRetention.SOURCE)' is always 'false'
-    } else if (a == AnnotationRetention.SOURCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'AnnotationTarget', 'AnnotationRetention'
-    }
-  }
-
-  void if_Nullable_Kotlin_Enum_To_Java_Enum(AnnotationRetention a) {
+  void if_NullableKotlinClass_To_JavaEnum(MyKotlinClassA a) {
     if (a.equals(RetentionPolicy.SOURCE)) {
-      // [warning] IDEA
-      // Condition 'a.equals(RetentionPolicy.SOURCE)' is always 'false'
     } else if (a == RetentionPolicy.SOURCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'AnnotationRetention', 'RetentionPolicy'
     }
   }
 
-  void if_Java_Static_To_Java_Static(JobStateReason a) {
+  void if_JavaStatic_To_JavaStatic(JobStateReason a) {
     if (a.equals(JobState.CANCELED)) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'JobStateReason' and 'JobState'
     } else if (a == JobState.CANCELED) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'JobStateReason', 'JobState'
     }
   }
 
-  void if_Java_Static_To_Kotlin_Static(JobState a) {
-    if (a.equals(MyKotlinObjectA.INSTANCE)) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'JobState' and 'MyKotlinObjectA'
-    } else if (a == MyKotlinObjectA.INSTANCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'JobState', 'MyKotlinObjectA'
+  void if_JavaStatic_To_KotlinClass(JobState a) {
+    if (a.equals(new MyKotlinClassA())) {
+    } else if (a == new MyKotlinClassA()) {
     }
   }
 
-  void if_Kotlin_Static_To_Kotlin_Static(MyKotlinObjectB a) {
-    if (a.equals(MyKotlinObjectA.INSTANCE)) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyKotlinObjectB' and 'MyKotlinObjectA'
-    } else if (a == MyKotlinObjectA.INSTANCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyKotlinObjectB', 'MyKotlinObjectA'
-    }
-  }
-
-  void if_Nullable_Kotlin_Static_To_Kotlin_Static(MyKotlinObjectB a) {
-    if (a.equals(MyKotlinObjectA.INSTANCE)) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyKotlinObjectB' and 'MyKotlinObjectA'
-    } else if (a == MyKotlinObjectA.INSTANCE) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyKotlinObjectB', 'MyKotlinObjectA'
-    }
-  }
-
-  void if_Nullable_Kotlin_Static_To_Java_Static(MyKotlinObjectA a) {
+  void if_NullableKotlinClass_To_JavaStatic(MyKotlinClassA a) {
     if (a.equals(JobState.CANCELED)) {
-      // [warning] IDEA
-      // 'equals()' between objects of inconvertible types 'MyKotlinObjectA' and 'JobState'
     } else if (a == JobState.CANCELED) {
-      // [error] compiler
-      // Operator '==' cannot be applied to 'MyKotlinObjectA', 'JobState'
     }
   }
 
-  void switch_Java_Enum_To_Java_Enum(ElementType a) {
-    // [error] compiler
-    // Required type: ElementType, Provided: RetentionPolicy
+  void if_JavaClass_To_KotlinEnum(MyJavaClassA a) {
+    if (a.equals(AnnotationRetention.SOURCE)) {
+    } else if (a == AnnotationRetention.SOURCE) {
+    }
+  }
+
+  void if_KotlinEnum_To_KotlinEnum(AnnotationTarget a) {
+    if (a.equals(AnnotationRetention.SOURCE)) {
+    } else if (a == AnnotationRetention.SOURCE) {
+    }
+  }
+
+  void if_NullableKotlinEnum_To_KotlinEnum(AnnotationTarget a) {
+    if (a.equals(AnnotationRetention.SOURCE)) {
+    } else if (a == AnnotationRetention.SOURCE) {
+    }
+  }
+
+  void if_NullableKotlinEnum_To_JavaClass(AnnotationRetention a) {
+    if (a.equals(new MyJavaClassA())) {
+    } else if (a == new MyJavaClassA()) {
+    }
+  }
+
+  void if_JavaEnum_To_KotlinEnum(RetentionPolicy a) {
+    if (a.equals(AnnotationRetention.SOURCE)) {
+    } else if (a == AnnotationRetention.SOURCE) {
+    }
+  }
+
+  void if_NullableKotlinEnum_To_JavaEnum(AnnotationRetention a) {
+    if (a.equals(RetentionPolicy.SOURCE)) {
+    } else if (a == RetentionPolicy.SOURCE) {
+    }
+  }
+
+  void if_JavaStatic_To_KotlinEnum(JobState a) {
+    if (a.equals(AnnotationRetention.SOURCE)) {
+    } else if (a == AnnotationRetention.SOURCE) {
+    }
+  }
+
+  void if_NullableKotlinEnum_To_JavaStatic(AnnotationRetention a) {
+    if (a.equals(JobState.CANCELED)) {
+    } else if (a == JobState.CANCELED) {
+    }
+  }
+
+  void if_JavaClass_To_KotlinStatic(MyJavaClassA a) {
+    if (a.equals(MyKotlinObjectA.INSTANCE)) {
+    } else if (a == MyKotlinObjectA.INSTANCE) {
+    }
+  }
+
+  void if_KotlinStatic_To_KotlinStatic(MyKotlinObjectB a) {
+    if (a.equals(MyKotlinObjectA.INSTANCE)) {
+    } else if (a == MyKotlinObjectA.INSTANCE) {
+    }
+  }
+
+  void if_NullableKotlinStatic_To_KotlinStatic(MyKotlinObjectB a) {
+    if (a.equals(MyKotlinObjectA.INSTANCE)) {
+    } else if (a == MyKotlinObjectA.INSTANCE) {
+    }
+  }
+
+  void if_NullableKotlinStatic_To_JavaClass(MyKotlinObjectA a) {
+    if (a.equals(new MyJavaClassA())) {
+    } else if (a == new MyJavaClassA()) {
+    }
+  }
+
+  void if_JavaEnum_To_KotlinStatic(RetentionPolicy a) {
+    if (a.equals(MyKotlinObjectA.INSTANCE)) {
+    } else if (a == MyKotlinObjectA.INSTANCE) {
+    }
+  }
+
+  void if_NullableKotlinStatic_To_JavaEnum(MyKotlinObjectA a) {
+    if (a.equals(RetentionPolicy.SOURCE)) {
+    } else if (a == RetentionPolicy.SOURCE) {
+    }
+  }
+
+  void if_JavaStatic_To_KotlinStatic(JobState a) {
+    if (a.equals(MyKotlinObjectA.INSTANCE)) {
+    } else if (a == MyKotlinObjectA.INSTANCE) {
+    }
+  }
+
+  void if_NullableKotlinStatic_To_JavaStatic(MyKotlinObjectA a) {
+    if (a.equals(JobState.CANCELED)) {
+    } else if (a == JobState.CANCELED) {
+    }
+  }
+
+  void switch_JavaEnum_To_JavaEnum(ElementType a) {
     switch (a) {
       case RetentionPolicy.SOURCE:
         break;
@@ -171,9 +181,16 @@ class JavaGenerated {
     }
   }
 
-  void switch_Java_Enum_To_Kotlin_Enum(RetentionPolicy a) {
-    // [error] compiler
-    // Required type: RetentionPolicy, Provided: AnnotationRetention
+  void switch_JavaEnum_To_KotlinClass(RetentionPolicy a) {
+    switch (a) {
+      case new MyKotlinClassA():
+        break;
+      default:
+        throw new IllegalStateException();
+    }
+  }
+
+  void switch_KotlinEnum_To_KotlinEnum(AnnotationTarget a) {
     switch (a) {
       case AnnotationRetention.SOURCE:
         break;
@@ -182,9 +199,7 @@ class JavaGenerated {
     }
   }
 
-  void switch_Kotlin_Enum_To_Kotlin_Enum(AnnotationTarget a) {
-    // [error] compiler
-    // Required type: AnnotationTarget, Provided: AnnotationRetention
+  void switch_NullableKotlinEnum_To_KotlinEnum(AnnotationTarget a) {
     switch (a) {
       case AnnotationRetention.SOURCE:
         break;
@@ -193,9 +208,16 @@ class JavaGenerated {
     }
   }
 
-  void switch_Nullable_Kotlin_Enum_To_Kotlin_Enum(AnnotationTarget a) {
-    // [error] compiler
-    // Required type: AnnotationTarget, Provided: RetentionPolicy
+  void switch_NullableKotlinEnum_To_JavaClass(AnnotationRetention a) {
+    switch (a) {
+      case new MyJavaClassA():
+        break;
+      default:
+        throw new IllegalStateException();
+    }
+  }
+
+  void switch_JavaEnum_To_KotlinEnum(RetentionPolicy a) {
     switch (a) {
       case AnnotationRetention.SOURCE:
         break;
@@ -204,11 +226,27 @@ class JavaGenerated {
     }
   }
 
-  void switch_Nullable_Kotlin_Enum_To_Java_Enum(AnnotationRetention a) {
-    // [error] compiler
-    // Required type: AnnotationRetention, Provided: RetentionPolicy
+  void switch_NullableKotlinEnum_To_JavaEnum(AnnotationRetention a) {
     switch (a) {
       case RetentionPolicy.SOURCE:
+        break;
+      default:
+        throw new IllegalStateException();
+    }
+  }
+
+  void switch_NullableKotlinEnum_To_JavaStatic(AnnotationRetention a) {
+    switch (a) {
+      case JobState.CANCELED:
+        break;
+      default:
+        throw new IllegalStateException();
+    }
+  }
+
+  void switch_JavaEnum_To_KotlinStatic(RetentionPolicy a) {
+    switch (a) {
+      case MyKotlinObjectA.INSTANCE:
         break;
       default:
         throw new IllegalStateException();
