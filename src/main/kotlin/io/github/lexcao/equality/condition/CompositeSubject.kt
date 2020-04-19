@@ -4,16 +4,16 @@ import io.github.lexcao.equality.poets.ControlFlow
 
 data class CompositeSubject(
     val type: SubjectType,
-    val java: Subject<*>,
-    val kotlin: Subject<*>
+    val java: Subject,
+    val kotlin: Subject
 ) {
 
     private val pairs = listOf(
-        java to java,
-        java to kotlin,
-        kotlin to kotlin,
-        kotlin.nullable() to kotlin,
-        kotlin.nullable() to java
+        java.backup() to java, // J 2 J
+        java to kotlin, // J 2 K
+        kotlin.backup() to kotlin, // K 2 K
+        kotlin.backup().nullable() to kotlin, // K? 2 K
+        kotlin.nullable() to java // K? 2 J
     )
 
     fun generateKotlinControlFlow(): List<ControlFlow.KotlinCF> {
@@ -60,6 +60,6 @@ data class CompositeSubject(
         }
     }
 
-    private val Pair<Subject<*>, Subject<*>>.name: String
+    private val Pair<Subject, Subject>.name: String
         get() = "${first}_To_${second}"
 }

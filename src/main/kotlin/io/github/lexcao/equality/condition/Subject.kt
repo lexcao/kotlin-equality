@@ -1,8 +1,9 @@
 package io.github.lexcao.equality.condition
 
-data class Subject<T>(
-    val type: Class<T>,
-    val name: String,
+data class Subject(
+    val type: Class<out Any>,
+    private val backup: Class<out Any>,
+    private val name: String,
     val value: String,
     var nullable: Boolean = false
 ) {
@@ -15,7 +16,9 @@ data class Subject<T>(
         value
     }
 
-    fun nullable(): Subject<T> = this.copy(nullable = true)
+    fun nullable(): Subject = this.copy(nullable = true)
+    fun backup(): Subject = this.copy(type = this.backup, backup = this.type)
+
 
     override fun toString(): String {
         return if (nullable) "Nullable_$name" else name

@@ -3,14 +3,16 @@ package io.gihub.lexcao.equality.poet
 import io.github.lexcao.equality.condition.Subject
 import io.github.lexcao.equality.poets.ControlFlow
 import io.github.lexcao.equality.poets.Poet
-import io.github.lexcao.equality.subjects.MyKotlinClass
+import io.github.lexcao.equality.subjects.MyKotlinClassA
+import io.github.lexcao.equality.subjects.MyKotlinClassB
 import org.junit.Assert
 import org.junit.Test
 
 class PoetTest {
 
-    val a = Subject(MyKotlinClass::class.java, "Kotlin_Class", "MyKotlinClass()")
-    val b = Subject(MyKotlinClass::class.java, "Kotlin_Class", "MyKotlinClass()")
+    val a = Subject(MyKotlinClassA::class.java, MyKotlinClassB::class.java, "Kotlin_Class", "MyKotlinClassA()")
+    val b = Subject(MyKotlinClassA::class.java, MyKotlinClassB::class.java, "Kotlin_Class", "MyKotlinClassA()")
+    val simpleClassNameA = MyKotlinClassA::class.simpleName ?: ""
 
     @Test
     fun testKotlinPoet() {
@@ -24,11 +26,11 @@ class PoetTest {
             """
                 package test
                 
-                import io.github.lexcao.equality.subjects.MyKotlinClass
+                import io.github.lexcao.equality.subjects.$simpleClassNameA
             
                 class TestGenerated {
-                  fun testIf(a: MyKotlinClass) {
-                    if (a == MyKotlinClass()) {
+                  fun testIf(a: $simpleClassNameA) {
+                    if (a == $simpleClassNameA()) {
                     }
                   }
                 }
@@ -48,11 +50,13 @@ class PoetTest {
             """
                 package test;
                 
-                import io.github.lexcao.equality.subjects.MyKotlinClass;
+                import io.github.lexcao.equality.subjects.$simpleClassNameA;
             
                 class TestGenerated {
-                  void testIf(MyKotlinClass a) {
-                    if (a == new MyKotlinClass()) {
+                  void testIf($simpleClassNameA a) {
+                    if (a.equals(new $simpleClassNameA())) {
+                    }
+                    else if (a == new $simpleClassNameA()) {
                     }
                   }
                 }

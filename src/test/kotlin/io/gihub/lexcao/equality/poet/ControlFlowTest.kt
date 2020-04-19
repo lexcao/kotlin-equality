@@ -2,29 +2,44 @@ package io.gihub.lexcao.equality.poet
 
 import io.github.lexcao.equality.condition.Subject
 import io.github.lexcao.equality.poets.ControlFlow
-import io.github.lexcao.equality.subjects.MyKotlinClass
+import io.github.lexcao.equality.subjects.MyKotlinClassA
+import io.github.lexcao.equality.subjects.MyKotlinClassB
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ControlFlowTest {
 
-    val a = Subject(MyKotlinClass::class.java, "Kotlin_Class", "MyKotlinClass()")
-    val b = Subject(MyKotlinClass::class.java, "Kotlin_Class", "MyKotlinClass()")
-    val fullClassName = MyKotlinClass::class.java.canonicalName
+    val a = Subject(MyKotlinClassA::class.java, MyKotlinClassB::class.java, "Kotlin_Class", "MyKotlinClassA()")
+    val b = Subject(MyKotlinClassA::class.java, MyKotlinClassB::class.java, "Kotlin_Class", "MyKotlinClassA()")
+    val fullClassNameA = MyKotlinClassA::class.java.canonicalName
+    val fullClassNameB = MyKotlinClassB::class.java.canonicalName
 
     @Test
-    fun testNullableIfK() {
-        val function = ControlFlow.IfK("kotlinIf", a.copy(nullable = true) to b)
+    fun testBackupIfK() {
+        val function = ControlFlow.IfK("kotlinIf", a.backup() to b)
         assertEquals(
             """
-            fun kotlinIf(a: $fullClassName?) {
-              if (a == MyKotlinClass()) {
+            fun kotlinIf(a: $fullClassNameB) {
+              if (a == MyKotlinClassA()) {
               }
             }
             
         """.trimIndent(), function.toString()
         )
+    }
 
+    @Test
+    fun testNullableIfK() {
+        val function = ControlFlow.IfK("kotlinIf", a.nullable() to b)
+        assertEquals(
+            """
+            fun kotlinIf(a: $fullClassNameA?) {
+              if (a == MyKotlinClassA()) {
+              }
+            }
+            
+        """.trimIndent(), function.toString()
+        )
     }
 
     @Test
@@ -32,8 +47,8 @@ class ControlFlowTest {
         val function = ControlFlow.IfK("kotlinIf", a to b)
         assertEquals(
             """
-            fun kotlinIf(a: $fullClassName) {
-              if (a == MyKotlinClass()) {
+            fun kotlinIf(a: $fullClassNameA) {
+              if (a == MyKotlinClassA()) {
               }
             }
             
@@ -46,9 +61,9 @@ class ControlFlowTest {
         val function = ControlFlow.WhenK("kotlinWhen", a to b)
         assertEquals(
             """
-            fun kotlinWhen(a: $fullClassName) {
+            fun kotlinWhen(a: $fullClassNameA) {
               when (a) {
-                MyKotlinClass() -> {}
+                MyKotlinClassA() -> {}
                 else -> throw IllegalStateException()
               }
             }
@@ -62,8 +77,10 @@ class ControlFlowTest {
         val method = ControlFlow.IfJ("javaIf", a to b)
         assertEquals(
             """
-            void javaIf($fullClassName a) {
-              if (a == new MyKotlinClass()) {
+            void javaIf($fullClassNameA a) {
+              if (a.equals(new MyKotlinClassA())) {
+              }
+              else if (a == new MyKotlinClassA()) {
               }
             }
             
@@ -76,9 +93,9 @@ class ControlFlowTest {
         val function = ControlFlow.SwitchJ("javaSwitch", a to b)
         assertEquals(
             """
-            void javaSwitch($fullClassName a) {
+            void javaSwitch($fullClassNameA a) {
               switch (a) {
-                case new MyKotlinClass(): break;
+                case new MyKotlinClassA(): break;
                 default: throw new IllegalStateException();
               }
             }

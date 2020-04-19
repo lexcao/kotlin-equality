@@ -21,7 +21,7 @@ interface ControlFlow<Method, Param> {
      */
     class IfK(
         name: String,
-        pair: Pair<Subject<*>, Subject<*>>
+        pair: Pair<Subject, Subject>
     ) : KotlinCF {
 
         override val param: KotlinParam = KotlinParam(
@@ -43,7 +43,7 @@ interface ControlFlow<Method, Param> {
      */
     class WhenK(
         name: String,
-        pair: Pair<Subject<*>, Subject<*>>
+        pair: Pair<Subject, Subject>
     ) : KotlinCF {
 
         override val param: KotlinParam = KotlinParam(
@@ -57,6 +57,10 @@ interface ControlFlow<Method, Param> {
                 addStatement("else -> throw IllegalStateException()")
             }
         }
+
+        override fun toString(): String {
+            return flow.toString()
+        }
     }
 
     /**
@@ -64,13 +68,20 @@ interface ControlFlow<Method, Param> {
      */
     class IfJ(
         name: String,
-        pair: Pair<Subject<*>, Subject<*>>
+        pair: Pair<Subject, Subject>
     ) : JavaCF {
 
         override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.type), "a").build()
 
         override val flow: MethodSpec by lazy {
-            javaFlow(name, "if (${param.name}.equals(${pair.second.javaValue()}))", param)
+            javaFlow(name, "if (${param.name}.equals(${pair.second.javaValue()}))", param) {
+                endControlFlow()
+                beginControlFlow("else if (${param.name} == ${pair.second.javaValue()})")
+            }
+        }
+
+        override fun toString(): String {
+            return flow.toString()
         }
     }
 
@@ -80,7 +91,7 @@ interface ControlFlow<Method, Param> {
      */
     class SwitchJ(
         name: String,
-        pair: Pair<Subject<*>, Subject<*>>
+        pair: Pair<Subject, Subject>
     ) : JavaCF {
 
         override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.type), "a").build()
@@ -90,6 +101,10 @@ interface ControlFlow<Method, Param> {
                 addStatement("case ${pair.second.javaValue()}: break")
                 addStatement("default: throw new IllegalStateException()")
             }
+        }
+
+        override fun toString(): String {
+            return flow.toString()
         }
     }
 
