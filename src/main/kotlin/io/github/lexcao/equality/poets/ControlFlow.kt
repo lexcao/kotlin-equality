@@ -26,7 +26,7 @@ interface ControlFlow<Method, Param> {
 
         override val param: KotlinParam = KotlinParam(
             "a", pair.first
-                .type.asClassName().copy(nullable = pair.first.nullable)
+                .target.asClassName().copy(nullable = pair.first.nullable)
         )
 
         override val flow: FunSpec by lazy {
@@ -48,7 +48,7 @@ interface ControlFlow<Method, Param> {
 
         override val param: KotlinParam = KotlinParam(
             "a", pair.first
-                .type.asClassName().copy(nullable = pair.first.nullable)
+                .target.asClassName().copy(nullable = pair.first.nullable)
         )
 
         override val flow: FunSpec by lazy {
@@ -71,7 +71,7 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : JavaCF {
 
-        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.type), "a").build()
+        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.target), "a").build()
 
         override val flow: MethodSpec by lazy {
             javaFlow(name, "if (${param.name}.equals(${pair.second.javaValue()}))", param) {
@@ -94,7 +94,7 @@ interface ControlFlow<Method, Param> {
         pair: Pair<Subject, Subject>
     ) : JavaCF {
 
-        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.type), "a").build()
+        override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.target), "a").build()
 
         override val flow: MethodSpec by lazy {
             javaFlow(name, "switch (${param.name})", param) {

@@ -3,12 +3,11 @@ package io.github.lexcao.equality.condition
 import io.github.lexcao.equality.poets.ControlFlow
 
 data class CompositeSubject(
-    val type: SubjectType,
     val java: Subject,
     val kotlin: Subject
 ) {
 
-    private val pairs = listOf(
+    val pairs = listOf(
         java.backup() to java, // J 2 J
         java to kotlin, // J 2 K
         kotlin.backup() to kotlin, // K 2 K
@@ -33,8 +32,11 @@ data class CompositeSubject(
         }
     }
 
+    /**
+     *  switch 只有 enum / String / primitive
+     */
     fun generateSwitchJ(): List<ControlFlow.SwitchJ> {
-        return pairs.map {
+        return pairs.filter { it.first.type == SubjectType.ENUM }.map {
             ControlFlow.SwitchJ(
                 name = "switch_${it.name}",
                 pair = it

@@ -1,8 +1,9 @@
 package io.github.lexcao.equality.condition
 
 data class Subject(
-    val type: Class<out Any>,
+    val target: Class<out Any>,
     private val backup: Class<out Any>,
+    val type: SubjectType,
     private val name: String,
     val value: String,
     var nullable: Boolean = false
@@ -17,7 +18,7 @@ data class Subject(
     }
 
     fun nullable(): Subject = this.copy(nullable = true)
-    fun backup(): Subject = this.copy(type = this.backup, backup = this.type)
+    fun backup(): Subject = this.copy(target = this.backup, backup = this.target)
 
 
     override fun toString(): String {
