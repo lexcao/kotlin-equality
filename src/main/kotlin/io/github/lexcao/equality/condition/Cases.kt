@@ -37,11 +37,6 @@ object Cases {
                 name = "if_${it.name}",
                 pair = it
             )
-        } + pairs.map {
-            ControlFlow.WhenK(
-                name = "when_${it.name}",
-                pair = it
-            )
         }
     }
 
@@ -53,13 +48,7 @@ object Cases {
                 name = "if_${it.name}",
                 pair = it
             )
-        } + pairs.filter { it.first is EnumType }
-            .map {
-                ControlFlow.SwitchJ(
-                    name = "switch_${it.name}",
-                    pair = it
-                )
-            }
+        }
     }
 
     private val Pair<Subject, Subject>.name: String

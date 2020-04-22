@@ -32,9 +32,8 @@ interface ControlFlow<Method, Param> {
                 .target.asClassName().copy(nullable = nullable)
         )
 
-        override val flow: FunSpec by lazy {
+        override val flow: FunSpec =
             kotlinFlow(name, "if (${param.name} == ${pair.second.kotlinValue()})", param)
-        }
 
         override fun toString(): String {
             return flow.toString()
@@ -56,12 +55,11 @@ interface ControlFlow<Method, Param> {
                 .target.asClassName().copy(nullable = nullable)
         )
 
-        override val flow: FunSpec by lazy {
+        override val flow: FunSpec =
             kotlinFlow(name, "when (${param.name})", param) {
                 addStatement("${pair.second.kotlinValue()} -> {}")
                 addStatement("else -> throw IllegalStateException()")
             }
-        }
 
         override fun toString(): String {
             return flow.toString()
@@ -78,12 +76,11 @@ interface ControlFlow<Method, Param> {
 
         override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.target), "a").build()
 
-        override val flow: MethodSpec by lazy {
+        override val flow: MethodSpec =
             javaFlow(name, "if (${param.name}.equals(${pair.second.javaValue()}))", param) {
                 endControlFlow()
                 beginControlFlow("else if (${param.name} == ${pair.second.javaValue()})")
             }
-        }
 
         override fun toString(): String {
             return flow.toString()
@@ -101,12 +98,12 @@ interface ControlFlow<Method, Param> {
 
         override val param: JavaParam = JavaParam.builder(ClassName.get(pair.first.target), "a").build()
 
-        override val flow: MethodSpec by lazy {
+        override val flow: MethodSpec =
             javaFlow(name, "switch (${param.name})", param) {
                 addStatement("case ${pair.second.javaValue()}: break")
                 addStatement("default: throw new IllegalStateException()")
             }
-        }
+
 
         override fun toString(): String {
             return flow.toString()
