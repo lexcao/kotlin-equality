@@ -37,8 +37,8 @@ if (state == CANCELED) {
 }
 ```
 
-The question is:
-why the Kotlin nullable enum can equal to Java static class without compiling error by Kotlin compiler or warning `INCOMPATIBLE_ENUM_COMPARISON` by IDEA?
+## Question
+Why the Kotlin nullable enum can equal to Java static class without compiling error by Kotlin compiler or warning `INCOMPATIBLE_ENUM_COMPARISON` by IDEA?
 
 ## Solution
 Why this happens?
@@ -52,10 +52,10 @@ a === b => a and b point to the same object
 2. The `null` info of the java static object `JobState.CANCELED` is unknown;
 3. It would compile successfully when executing on condition of `b === null` between two `nullable` type.
 
-If like this: 
+To avoid the question:
 ```kolitn
-// Tell the `null` info of Java class to compiler
-// [INCOMPATIBLE_ENUM_COMPARISON] would be warning friendly by IDEA
+// By telling the `null` info of Java class to compiler,
+// [INCOMPATIBLE_ENUM_COMPARISON] it would be warning friendly by IDEA
 fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {
     // Use !! to tell compiler explicitly that the `null` info is NotNull
     if (a == JobState.CANCELED!!) {
