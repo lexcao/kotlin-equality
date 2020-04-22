@@ -7,10 +7,10 @@ The original code is on `master` branch while the generated files, [`JavaGenerat
 ## Why equality
 I encountered a potentially unexpected equality result when I am coding with Kotlin. Here are some code snippets.
 
-// (WIP) You can read details on my blog, if you are interested.
+You can read details on this [***blog***](https://lexcao.github.io/zh/posts/kotlin-equality-diving), if you are interested.
 
-```
-// say we hava a enum 
+```kotlin
+// say we have a enum 
 enum class MyState {
     SUCCESS, CANCELED;
 }
@@ -36,11 +36,32 @@ if (state == CANCELED) {
     // when it runs, the code will never reach here
 }
 ```
-My question is:
-* Why they compile successfully?
-* Why the compiler could not tell me unsuccessful condition at compilation time or giving a warning from IDEA just like that when equaling between two enums, there is a warning said `INCOMPATIBLE_ENUM_COMPARISON`.
-* Is that a wrong code?
 
-## Why compiles successfully?
-(WIP)
+The question is:
+why the Kotlin nullable enum can equal to Java static class without compiling error by Kotlin compiler or warning `INCOMPATIBLE_ENUM_COMPARISON` by IDEA?
+
+## Solution
+Why this happens?
+
+```
+In Kotlin, equality is like this:
+a == b => a?.equals(b) ?: (b === null)
+a === b => a and b point to the same object
+```
+1. All Kotlin enums are compiled to `Enum<E : Enum<E>>`;
+2. The `null` info of the java static object `JobState.CANCELED` is unknown;
+3. It would compile successfully when executing on condition of `b === null` between two `nullable` type.
+
+If like this: 
+```kolitn
+// Tell the `null` info of Java class to compiler
+// [INCOMPATIBLE_ENUM_COMPARISON] would be warning friendly by IDEA
+fun if_NullableKotlinEnum_To_JavaStatic(a: AnnotationRetention?) {
+    // Use !! to tell compiler explicitly that the `null` info is NotNull
+    if (a == JobState.CANCELED!!) {
+        // [INCOMPATIBLE_ENUM_COMPARISON] Comparison of incompatible enums 
+        // 'AnnotationRetention?' and 'JobState' is always unsuccessful
+    }
+}
+```
 
